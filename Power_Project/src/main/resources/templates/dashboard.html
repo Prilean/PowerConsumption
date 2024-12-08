@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicular Safety Management Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        html, body {
+            height: 100%; 
+            margin: 0; 
+        }
+        
+        body {
+            background-image: url("/images/Background.png");
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px; 
+            background-color: rgb(0, 35, 44);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: space-around; 
+            align-items: center;
+            margin: 0 40px 0 10px;
+            flex-grow: 1;
+        }
+        
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px; 
+        }
+        
+        .nav-icon {
+            margin-right: 5px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .Dashboard {
+            background-color: rgb(0, 159, 185);
+            padding: 10px 20px;
+            border-radius: 2px;
+        }
+        
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-buttons img {
+            width: 24px;
+            height: 24px;
+            margin-left: 15px; /* Space between header icons */
+            cursor: pointer;
+        }
+        
+        .demo {
+            display: inline-flex; 
+            align-items: center; 
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .demo img {
+            margin-left: 2px;
+            height: 15px; 
+            width: 15px;
+            vertical-align: middle;
+            filter: brightness(0) invert(1);
+        }
+        
+        .main-dashboard {
+            padding: 20px;
+        }
+        
+        .header-info {
+            position: relative; 
+        }
+        
+        .header-info img.header {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .header-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: rgb(0, 255, 255); 
+            padding: 10px 20px;
+            z-index: 10;
+        }
+        
+        .time, .date {
+            position: absolute; 
+            color: rgb(0, 255, 255); 
+            text-align: center; 
+        }
+        
+        .time {
+            top: 14%; 
+            right: 3%;
+            font-size: 25px;
+        }
+        
+        .calender {
+            position: absolute; 
+            top: 25%; 
+            left: 10%;
+            transform: translateX(-50%); 
+            color: rgb(0, 255, 255); 
+            text-align: center; 
+        }
+        
+        .date {
+            top: 30%; 
+            right: 12%;
+        }
+        
+        .main-icon {
+            width: auto;
+            margin-right: 45px; 
+        }
+        
+        .navlist-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .footer-info {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
+            background-color: rgb(20, 20, 20); 
+            color: white; 
+            text-align: center; 
+            padding: 10px; 
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3); 
+        }
+        
+        .dashboard{
+            margin-top: -200px;
+        }
+
+</style>   
+</head>
+<body>
+        <!-- Header Section -->
+        <header class="navbar">
+            <div><img class="main-icon" src="/images/logo.png" alt=""></div>
+            <div><img class="navlist-icon" src="/images/Navigation.png" alt=""></div>
+            <div class="nav-links">   
+                <a class="Dashboard" href="/home">
+                    <img class="nav-icon" src="/images/Dashboard.png" alt="">
+                    Dashboard
+                </a>
+                <a href="/liveview">
+                    <img class="nav-icon" src="/images/Liveview.png" alt="">
+                    Liveview
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Location.png" alt="">
+                    Location
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Playback.png" alt="">
+                    Playback
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Track.png" alt="">
+                    Track
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Qeury.png" alt="">
+                    Query
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Manage.png" alt="">
+                    Manage
+                </a>
+            </div>
+            <div class="header-buttons">
+                <img class="header-icon" src="/images/Download.png" alt="">
+                <img class="header-icon" src="/images/Alarm.png" alt="">
+                <img class="header-icon" src="/images/Setting.png" alt="">
+                <span class="demo">
+                DEMO <img src="/images/Down-arrow.png" alt="Down Arrow">
+                </span>
+            </div>
+        </header>
+
+        <section>
+            <div class="header-info">
+                <span class="header-text">Vehicular Safety Management Dashboard</span>
+                <span class="calender" id="current-date"> 
+                    2024-10-13
+                    To
+                    2024-10-20
+                    </span>
+                <img class="header" src="/images/Banner.png" alt="">
+                <span class="time" id="current-time"> 13:56:35</span>
+                <span class="date" id="current-time"> 2024.10.20 Sunday
+                </span>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+    <section class="main-dashboard">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0D1B2A;
+            color: #E0E6ED;
+        }
+
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            margin-top: -150px;
+        }
+
+        .left-column, .right-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #E0E6ED;
+        }
+
+        .section {
+            background-color: #142D4C;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            height: 100%;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: #E0E6ED;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #E0E6ED;
+        }
+
+        table, th, td {
+            border: 1px solid #E0E6ED;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1B263B;
+        }
+
+        #bar-chart, #bubble-chart {
+            width: 100%;
+            height: 100%;
+        }
+        #trigger-events {
+        flex: 2; /* Set a larger flex value to take the combined height of the left column sections */
+        margin-top: 0; /* No need to move it up if it is already well-aligned */
+    }
+
+    </style>
+
+
+    <section class="main-dashboard">
+        <div class="dashboard">
+            <!-- Left Column (Vehicle Status + Vehicle Assignments) -->
+            <div class="left-column">
+                <!-- Vehicle Status Section -->
+                <div class="section" id="vehicle-status">
+                    <h2>Vehicle Status</h2>
+                    <p>Summary: There are significantly more active vehicles...</p>
+                    <table>
+                        <tr>
+                            <th>Status</th>
+                            <th>Count</th>
+                        </tr>
+                        <tr>
+                            <td>Active</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Inactive</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Vehicle Assignments Section -->
+                <div  class="section" id="vehicle-assignments">
+                    <h2>Vehicle Assignments</h2>
+                    <table>
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Unique Vehicles</th>
+                        </tr>
+                        <tr>
+                            <td>Assigned</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Unassigned</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column (Alarm Trigger Events) -->
+            <div class="right-column">
+                <!-- Trigger Event Chart -->
+                <div class="section" id="trigger-events">
+                    <h2>Average of Total Alarm Trigger Events (August)</h2>
+                    <canvas id="bar-chart" width="792" height="800" style="display: block; box-sizing: border-box; height: 176px; width: 352px;"></canvas>
+                </div>
+            </div>
+            <!-- Geofence Location Chart -->
+            <div class="section" id="geofence-location">
+            <h2>Geofence Location for Trigger Alarm Events</h2>
+            <p>Crucial insights: These alarm triggers occur with significant variability throughout August.</p>
+            <!-- Add canvas for bubble chart -->
+            <canvas id="bubble-chart" width="1230" height="1040" style="display: block; box-sizing: border-box; height: 273px; width: 547px;"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar chart configuration
+        const barChart = document.getElementById('bar-chart').getContext('2d');
+        new Chart(barChart, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Alarm Trigger Events',
+                    data: [25, 40, 30, 50],
+                    backgroundColor: '#1B263B',
+                    borderColor: 'white',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#E0E6ED',
+                        },
+                    },
+                    x: {
+                        ticks: {
+                            color: '#E0E6ED',
+                        },
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#E0E6ED',
+                        }
+                    }
+                }
+            }
+        });
+
+    // Bubble Chart Configuration
+    const ctxBubble = document.getElementById('bubble-chart').getContext('2d');
+    const bubbleChart = new Chart(ctxBubble, {
+    type: 'bubble',
+    data: {
+        datasets: [{
+        label: 'Geofence Alarm Events',
+        data: [
+            {x: 10, y: 20, r: 10},
+            {x: 15, y: 25, r: 15},
+            {x: 20, y: 30, r: 20},
+            {x: 25, y: 35, r: 25}
+        ],
+        backgroundColor: 'rgb(0, 159, 185)', // Greenish bubble color
+        borderColor: '#00bfa5', // Matching border color for the bubbles
+        borderWidth: 2,
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+        x: {
+            grid: {
+            color: '#ffffff' // Changed grid color to white
+            },
+            ticks: {
+            color: '#ffffff' // White text for ticks
+            }
+        },
+        y: {
+            grid: {
+            color: '#ffffff' // Changed grid color to white
+            },
+            ticks: {
+            color: '#ffffff' // White text for ticks
+            }
+        }
+        },
+        plugins: {
+        legend: {
+            labels: {
+            color: '#ffffff' // White text for the legend
+            }
+        }
+        }
+    }
+    });
+        
+    </script>
+    <footer>
+        <div class="footer-info">
+            <p>Run Time: 00:01:30 | Total: 260 | Online: 3 | Offline: 257 | Web Platform: 2.3.1 | Server: 3.6.8.8</p>
+        </div>
+    </footer>
+</body>
+</html>

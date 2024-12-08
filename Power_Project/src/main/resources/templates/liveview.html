@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicular Safety Management Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        html, body {
+            height: fit-content; 
+            margin: 0; 
+        }
+        
+        body {
+            background-image: url("/images/Background.png");
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px; 
+            background-color: rgb(0, 35, 44);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: space-around; 
+            align-items: center;
+            margin: 0 40px 0 10px;
+            flex-grow: 1;
+        }
+        
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px; 
+        }
+        
+        .nav-icon {
+            margin-right: 5px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .logo-bg {
+            background-color: rgb(0, 159, 185);
+            padding: 10px 20px;
+            border-radius: 2px;
+        }
+        
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-buttons img {
+            width: 24px;
+            height: 24px;
+            margin-left: 15px; /* Space between header icons */
+            cursor: pointer;
+        }
+        
+        .demo {
+            display: inline-flex; 
+            align-items: center; 
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .demo img {
+            margin-left: 2px;
+            height: 15px; 
+            width: 15px;
+            vertical-align: middle;
+            filter: brightness(0) invert(1);
+        }
+        
+        .main-dashboard {
+            padding: 20px;
+        }
+        
+        .header-info {
+            position: relative; 
+        }
+        
+        .header-info img.header {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .header-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: rgb(0, 255, 255); 
+            padding: 10px 20px;
+            z-index: 10;
+        }
+        
+        .time, .date {
+            position: absolute; 
+            color: rgb(0, 255, 255); 
+            text-align: center; 
+        }
+        
+        .time {
+            top: 14%; 
+            right: 3%;
+            font-size: 25px;
+        }
+        
+        .calender {
+            position: absolute; 
+            top: 25%; 
+            left: 10%;
+            transform: translateX(-50%); 
+            color: rgb(0, 255, 255); 
+            text-align: center; 
+        }
+        
+        .date {
+            top: 30%; 
+            right: 12%;
+        }
+        
+        .main-icon {
+            width: auto;
+            margin-right: 45px; 
+        }
+        
+        .navlist-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .footer-info {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
+            background-color: rgb(20, 20, 20); 
+            color: white; 
+            text-align: center; 
+            padding: 10px; 
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3); 
+        }
+        
+        .dashboard{
+            margin-top: -200px;
+        }
+
+        
+
+</style>   
+</head>
+<body>
+        <!-- Header Section -->
+        <header class="navbar">
+            <div><img class="main-icon" src="/images/logo.png" alt=""></div>
+            <div><img class="navlist-icon" src="/images/Navigation.png" alt=""></div>
+            <div class="nav-links">   
+                <a href="/home">
+                    <img class="nav-icon" src="/images/Dashboard.png" alt="">
+                    Dashboard
+                </a>
+                <a class="logo-bg" href="/liveview">
+                    <img class="nav-icon" src="/images/Liveview.png" alt="">
+                    Liveview
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Location.png" alt="">
+                    Location
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Playback.png" alt="">
+                    Playback
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Track.png" alt="">
+                    Track
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Qeury.png" alt="">
+                    Query
+                </a>
+                <a href="#">
+                    <img class="nav-icon" src="/images/Manage.png" alt="">
+                    Manage
+                </a>
+            </div>
+            <div class="header-buttons">
+                <img class="header-icon" src="/images/Download.png" alt="">
+                <img class="header-icon" src="/images/Alarm.png" alt="">
+                <img class="header-icon" src="/images/Setting.png" alt="">
+                <span class="demo">
+                DEMO <img src="/images/Down-arrow.png" alt="Down Arrow">
+                </span>
+            </div>
+        </header>
+
+        <section>
+            <div class="header-info">
+                <span class="header-text">Vehicular Safety Management Dashboard</span>
+                <span class="calender" id="current-date"> 
+                    2024-10-13
+                    To
+                    2024-10-20
+                    </span>
+                <img class="header" src="/images/Banner.png" alt="">
+                <span class="time" id="current-time"> 13:56:35</span>
+                <span class="date" id="current-time"> 2024.10.20 Sunday
+                </span>
+            </div>
+        </section>
+
+<!-- Power Consumption Records Section -->
+<div class="container" style="max-width: 1200px; margin: 50px auto; padding: 20px; background-color: #142D4C; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); color: white; position: relative; top: -200px; margin-bottom: 40px;">
+    <h1 style="text-align: center;">Power Consumption Records</h1>
+
+    <!-- Add / Edit Record Form -->
+    <h2 style="text-align: center; margin: 20px;">Add / Edit Record</h2>
+    <div class="filter-section" style="margin-bottom: 20px;">
+        <label for="record-date" style="font-weight: bold; color: white;">Date:</label>
+        <input type="date" id="record-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+    </div>
+    <div class="filter-section" style="margin-bottom: 20px;">
+        <label for="record-hour" style="font-weight: bold; color: white;">Hour:</label>
+        <input type="time" id="record-hour" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+    </div>
+    <div class="filter-section" style="margin-bottom: 20px;">
+        <label for="record-consumption" style="font-weight: bold; color: white;">Consumption (kWh):</label>
+        <input type="number" step="0.1" id="record-consumption" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+    </div>
+    <div class="filter-section" style="margin-bottom: 20px;">
+        <label for="record-appliance-type" style="font-weight: bold; color: white;">Appliance Type:</label>
+        <select id="record-appliance-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+            <option value="1">Air Conditioner</option>
+            <option value="2">Heater</option>
+            <option value="3">Lighting</option>
+            <option value="4">Fan</option>
+        </select>
+    </div>
+    <button onclick="saveRecord()" style="padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; background-color: #007BFF;">Save Record</button>
+
+    <!-- Search and Filter Section -->
+    <div class="filter-section" style="margin-top: 20px;">
+        <label for="search" style="font-weight: bold; color: white;">Search:</label>
+        <input type="text" id="search" placeholder="Search by Date or Hour..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+    </div>
+    <div class="filter-section" style="margin-top: 20px;">
+        <label for="appliance-type" style="font-weight: bold; color: white;">Appliance Type:</label>
+        <select id="appliance-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px;">
+            <option value="All">All</option>
+            <option value="1">Air Conditioner</option>
+            <option value="2">Heater</option>
+            <option value="3">Lighting</option>
+            <option value="3">Fan</option>
+        </select>
+    </div>
+
+    <!-- Table Section -->
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">ID</th>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">Date</th>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">Hour</th>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">Consumption (kWh)</th>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">Appliance Type</th>
+                <th style="background-color: #1B263B; padding: 10px; text-align: left;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="records-table">
+            <!-- Records will be rendered here dynamically -->
+        </tbody>
+    </table>
+
+    <div id="pagination" style="text-align: center; margin-top: 20px;">
+        <button id="prev-page" onclick="prevPage()" style="padding: 10px; margin: 5px; cursor: pointer;">Previous</button>
+        <span id="page-info" style="margin: 0 10px;">Page 1 of 1</span>
+        <button id="next-page" onclick="nextPage()" style="padding: 10px; margin: 5px; cursor: pointer;">Next</button>
+    </div>
+    
+</div>
+
+<script>
+    let records = [];
+    let currentPage = 1;
+    const pageSize = 5;
+    async function fetchData(){
+        try {
+            const response = await fetch('/liveview/data');
+            const data = await response.json();
+            records = data;
+            
+        }
+        catch (error){
+
+        }
+    }
+    (async () => {
+        await fetchData();
+        console.log(records)
+        // Event listeners for search and appliance type filters
+        document.getElementById('search').addEventListener('input', () => {
+            currentPage = 1; // Reset to the first page
+            renderTable();
+        });
+        document.getElementById('appliance-type').addEventListener('change', () => {
+            currentPage = 1; // Reset to the first page
+            renderTable();
+        });
+        renderTable();
+    })();
+
+    function renderTable() {
+        const tableBody = document.getElementById('records-table');
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+        const applianceFilter = document.getElementById('appliance-type').value;
+
+        tableBody.innerHTML = '';
+        const filteredRecords = records.filter(record => {
+            const matchesSearch = record.date.toLowerCase().includes(searchTerm) || record.hour.includes(searchTerm);
+            const matchesApplianceType = applianceFilter === 'All' || record.type == applianceFilter;
+            return matchesSearch && matchesApplianceType;
+        });
+
+        const start = (currentPage - 1) * pageSize;
+        const paginatedRecords = filteredRecords.slice(start, start + pageSize);
+        appliance = {1 : "Air Condtioner", 2 : "Heater", 3: "Lighting", 4: "Fan"}
+        paginatedRecords.forEach(record => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${record.id}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${record.date}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${record.hour}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${record.consumption}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${appliance[record.type]}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        <button class="edit" onclick="editRecord(${record.id})" style="padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; background-color: #007BFF;">Edit</button>
+                        <button class="delete" onclick="deleteRecord(${record.id})" style="padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; background-color: #FF4D4D;">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        // Update pagination info
+        const totalPages = Math.ceil(filteredRecords.length / pageSize);
+        document.getElementById('page-info').innerText = `Page ${currentPage} of ${totalPages}`;
+        document.getElementById('prev-page').disabled = currentPage === 1;
+        document.getElementById('next-page').disabled = currentPage === totalPages;
+    }
+
+    function saveRecord() {
+        const date = document.getElementById('record-date').value;
+        const hour = document.getElementById('record-hour').value;
+        const consumption = parseFloat(document.getElementById('record-consumption').value);
+        const applianceType = document.getElementById('record-appliance-type').value;
+
+        if (!date || !hour || isNaN(consumption) || !applianceType) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        const newRecord = {
+            date: date,
+            hour: hour,
+            consumption: consumption,
+            type: applianceType,
+            user_id: null
+        };
+        fetch('/savedata', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newRecord),
+                
+            })
+            .then(response => {
+                records.push(newRecord);
+                renderTable();
+                alert("Successfully added");
+            })
+            renderTable();
+    }
+
+    function editRecord(id) {
+        window.location.href = `/edit/${id}`;
+    }
+
+    function deleteRecord(id) {
+        records = records.filter(record => record.id !== id);
+        fetch(`/delete/${id}`, {
+                method: 'DELETE',
+            })
+        if ((currentPage - 1) * pageSize >= records.length) {
+            currentPage = Math.max(1, currentPage - 1); // Adjust current page if the last record of the current page is deleted
+        }
+        renderTable();
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    }
+
+    function nextPage() {
+        const totalPages = Math.ceil(records.length / pageSize);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+        }
+    }
+
+</script>
+
+    <footer>
+        <div class="footer-info">
+            <p>Run Time: 00:01:30 | Total: 260 | Online: 3 | Offline: 257 | Web Platform: 2.3.1 | Server: 3.6.8.8</p>
+        </div>
+    </footer>
+</body>
+</html>
